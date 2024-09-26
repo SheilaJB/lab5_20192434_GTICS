@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+  <title>Catálogo de Profesionales</title>
+</head>
+<body>
+
+  <!--NavBar -->
+  <header th:replace="fragmentos/navbar :: nav_bar"></header>
+
+
+  <div class="main">
+    <div class="container px-4 py-5">
+
+      <!-- Buscador// Filtro -->
+      <div class="container my-4">
+
+        <form class="row g-3 mb-4" method="get" action="#">
+          <div> <!--Area -->
+            <select name="area" class="form-select">
+              <option value="">Área</option>
+              <option value="Psiquiatras">Psiquiatras</option>
+              <option value="Neurólogos">Neurólogos</option>
+              <option value="Psicólogos">Psicólogos</option>
+              <option value="Terapeutas">Terapeutas</option>
+            </select>
+          </div>
+          <div> <!-- fecha -->
+            <input type="date" value="DD/MM/AA">
+          </div>
+          <div class="col-md-4"> <!-- sede -->
+            <select name="sede" class="form-select">
+              <option value="">Sede</option>
+              <option value="San Martín">San Martín</option>
+              <option value="Lima">Lima</option>
+              <option value="Arequipa">Arequipa</option>
+              <option value="Trujillo">Trujillo</option>
+              <option value="Ayacucho">Ayacucho</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-outline-dark">Filtrar</button>
+            <a href="//" class="btn btn-outline-dark">Limpiar</a>
+
+          </div>
+        </form>
+
+        <!-- Catálogo-->
+
+        <div class="row">
+          <div class="col-md-3 mb-4" th:each=" profe: ${listaProfe}">
+            <div class="card h-100">
+              <img src="/img/doctor.jpg" class="card-img-top">
+              <div class="card-body">
+                <h5 class="card-title" th:text="${profe.nombre}">Nombre del Profesional:</h5>
+                <p class="card-text" th:text="${profe.idArea.nombreArea}">Área:</p>
+                <p class="card-text" th:text="${profe.descripcionProfesional}">Descirpción:</p>
+                <p class="card-text" th:text="${profe.idSede.nombreSede}">Sede:</p>
+              </div>
+              <div class="card-footer d-flex justify-content-center gap-2">
+                <a th:href="@{/profesionales/reservarCita}" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#pagoModal"> Registrar Cita </a> <!-- Lleva a form -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
