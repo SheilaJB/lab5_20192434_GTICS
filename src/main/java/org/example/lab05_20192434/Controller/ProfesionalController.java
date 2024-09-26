@@ -1,7 +1,9 @@
 package org.example.lab05_20192434.Controller;
 
 
+import org.example.lab05_20192434.Entity.Fechas;
 import org.example.lab05_20192434.Entity.Profesionales;
+import org.example.lab05_20192434.Repository.FechasRepository;
 import org.example.lab05_20192434.Repository.ProfesionalRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +18,11 @@ public class ProfesionalController {
 
     //Repositorios
     final ProfesionalRepository profesionalRepository;
+    final FechasRepository fechasRepository;
 
-    public ProfesionalController(ProfesionalRepository profesionalRepository) {
+    public ProfesionalController(ProfesionalRepository profesionalRepository, FechasRepository fechasRepository) {
         this.profesionalRepository = profesionalRepository;
+        this.fechasRepository = fechasRepository;
     }
 
 
@@ -34,7 +38,9 @@ public class ProfesionalController {
     @GetMapping("/reservarCita")
     public String reservarCita(Model model) {
         List<Profesionales> listaProfe = profesionalRepository.findAll();
+        List<Fechas> listaFecha = fechasRepository.findAll();
         model.addAttribute("listaProfe", listaProfe);
+        model.addAttribute("listaFecha", listaFecha);
         return "Profesionales/form";
     }
 
