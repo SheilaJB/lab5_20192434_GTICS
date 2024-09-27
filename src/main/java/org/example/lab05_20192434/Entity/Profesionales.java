@@ -4,36 +4,46 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.awt.geom.Area;
+import java.util.Collection;
+import java.util.List;
+
 @Data
 @Entity
-@Table(name = "profesionales")
+@Table(name = "Profesionales")
 public class Profesionales {
 
     @Id
-    @Column(name = "idProfesionales")
-    private int idProfesionales;
+    @Column(name = "idProfesionales",nullable = false)
+    private Integer idProfesionales;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre",nullable = false)
     private String nombre;
 
-    @Column(name = "imagen")
+    @Column(name = "imagen",nullable = false)
     private String imagen;
 
-    @Column(name = "descripcionProfesional")
+    @Column(name = "descripcionProfesional",nullable = false)
     private String descripcionProfesional;
 
     @ManyToOne
-    @JoinColumn(name = "idArea")
-    private Areas idArea;
+    @JoinColumn(name = "idArea",nullable = false)
+    private Areas area;
 
     @ManyToOne
-    @JoinColumn(name = "idSede")
-    private Sedes idSede;
+    @JoinColumn(name = "idSede",nullable = false)
+    private Sedes sedes;
+
+    @OneToMany
+    @JoinColumn(name = "Fechas",nullable = false)
+    private List<Fechas> fechas;
 
 
+    public Collection<Object> getFechasDisponibles() {
 
+        return List.of();
+    }
 
-
-
-
+    public Object getSede() {
+        return sedes;
+    }
 }

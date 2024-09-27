@@ -1,18 +1,18 @@
 package org.example.lab05_20192434.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
-@Table(name = "pacientes")
+@Table(name = "Pacientes")
 public class Pacientes {
 
     @Id
-    @Column(name = "idPacientes")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idPacientes", nullable = false)
     private int idPacientes;
 
     @Column(name = "nombrePaciente")
@@ -26,5 +26,9 @@ public class Pacientes {
 
     @Column(name = "Pacientescol")
     private String pacientescol;
+
+    @OneToMany
+    @JoinColumn(name = "Citas")
+    private List<Citas> citas;
 
 }

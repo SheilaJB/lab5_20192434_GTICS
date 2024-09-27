@@ -8,14 +8,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "sedes")
+@Table(name = "Sedes")
 public class Sedes {
 
     @Id
-    @Column(name = "idSedes")
+    @Column(name = "idSedes",nullable = false)
     private int idSedes;
 
-    @Column(name = "nombreSede")
+    @Column(name = "nombreSede", nullable = false)
     private String nombreSede;
 
 }

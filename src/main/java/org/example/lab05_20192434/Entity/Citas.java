@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "citas")
+@Table(name = "Citas")
 public class Citas {
 
     @Id
@@ -20,11 +20,6 @@ public class Citas {
     private int precio;
     @Column(name = "Citascol")
     private String Citascol;
-
-
-    @ManyToOne
-    @JoinColumn(name = "idPaciente")
-    private Pacientes paciente;
 
     @ManyToOne
     @JoinColumn(name = "idArea")
@@ -46,4 +41,7 @@ public class Citas {
     @JoinColumn(name = "idRiesgo")
     private Riesgos riesgos;
 
+    public Object getSede() {
+        return sedes;
+    }
 }

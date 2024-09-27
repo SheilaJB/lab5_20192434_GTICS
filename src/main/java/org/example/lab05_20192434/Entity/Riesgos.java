@@ -8,24 +8,16 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "riesgos")
+@Table(name = "Riesgos")
 public class Riesgos {
 
     @Id
-    @Column(name = "idRiesgos")
+    @Column(name = "idRiesgos",nullable = false)
     private int idRiesgos;
 
-    @Column(name = "Bajo")
-    private String Bajo;
+    @Column(name = "tipo",nullable = false)
+    private String tipo;
 
-    @Column(name = "Moderado")
-    private String Moderado;
-
-    @Column(name = "Alto")
-    private String Alto;
-
-    @Column(name = "Muy Alto")
-    private String MuyAlto;
 
 
 }

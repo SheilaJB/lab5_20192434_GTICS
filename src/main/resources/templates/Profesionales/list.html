@@ -15,25 +15,22 @@
   <div class="main">
     <div class="container px-4 py-5">
 
-      <!-- Buscador// Filtro -->
+      <!-- Buscador / Filtro -->
       <div class="container my-4">
 
-        <form class="row g-3 mb-4" method="get" action="#">
-          <div> <!--Area -->
+        <form class="row g-3 mb-4 justify-content-center" method="get"> <!-- Añadida la ruta de acción -->
+          <div class="col-md-3"> <!-- Área -->
             <select name="area" class="form-select">
-              <option value="">Área</option>
+              <option value="">Elige Área</option>
               <option value="Psiquiatras">Psiquiatras</option>
               <option value="Neurólogos">Neurólogos</option>
               <option value="Psicólogos">Psicólogos</option>
               <option value="Terapeutas">Terapeutas</option>
             </select>
           </div>
-          <div> <!-- fecha -->
-            <input type="date" value="DD/MM/AA">
-          </div>
-          <div class="col-md-4"> <!-- sede -->
+          <div class="col-md-3"> <!-- Sede -->
             <select name="sede" class="form-select">
-              <option value="">Sede</option>
+              <option value="">Elige Sede</option>
               <option value="San Martín">San Martín</option>
               <option value="Lima">Lima</option>
               <option value="Arequipa">Arequipa</option>
@@ -41,34 +38,36 @@
               <option value="Ayacucho">Ayacucho</option>
             </select>
           </div>
-          <div class="col-12">
-            <button type="submit" class="btn btn-outline-dark">Filtrar</button>
-            <a href="//" class="btn btn-outline-dark">Limpiar</a>
-
+          <div class="col-md-3"> <!-- Fecha -->
+            <input type="date" name="fecha" class="form-control">
+          </div>
+          <div class="col-3 justify-content-end">
+            <button type="submit" class="btn btn-outline-primary">Filtrar</button>
+            <a th:href="@{/profesionales/listar}" class="btn btn-outline-secondary">Limpiar</a> <!-- Limpiar filtros -->
+            <a th:href="@{/citas/reservarCita}" class="btn btn-outline-info" > Registrar Cita </a>
           </div>
         </form>
 
-        <!-- Catálogo-->
-
+        <!-- Catálogo -->
         <div class="row">
-          <div class="col-md-3 mb-4" th:each=" profe: ${listaProfe}">
+          <div class="col-md-3 mb-4" th:each="profe: ${listaProfe}">
             <div class="card h-100">
-              <img src="/img/doctor.jpg" class="card-img-top">
+              <img src="/img/doctor.jpg" class="card-img-top" alt="doctor"> <!-- Placeholder o imagen de la DB -->
               <div class="card-body">
-                <h5 class="card-title" th:text="${profe.nombre}">Nombre del Profesional:</h5>
-                <p class="card-text" th:text="${profe.idArea.nombreArea}">Área:</p>
-                <p class="card-text" th:text="${profe.descripcionProfesional}">Descirpción:</p>
-                <p class="card-text" th:text="${profe.idSede.nombreSede}">Sede:</p>
-              </div>
-              <div class="card-footer d-flex justify-content-center gap-2">
-                <a th:href="@{/profesionales/reservarCita}" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#pagoModal"> Registrar Cita </a> <!-- Lleva a form -->
+                <h5 class="card-title" th:text="${profe.nombre}">Nombre del Profesional</h5>
+                <p class="card-text" th:text="${profe.area.nombreArea}">Área</p>
+                <p class="card-text" th:text="${profe.descripcionProfesional}">Descripción</p>
+                <p class="card-text" th:text="${profe.sedes.nombreSede}">Sede</p>
               </div>
             </div>
           </div>
+          <div th:if="${#lists.isEmpty(listaProfe)}">
+            <p>No hay profesionales disponibles en este momento.</p>
+          </div>
+
         </div>
       </div>
     </div>
-
   </div>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

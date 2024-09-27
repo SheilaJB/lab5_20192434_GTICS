@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Catálogo de Profesionales</title>
+</head>
+<body>
+
+    <!--NavBar -->
+    <div th:replace="~{fragmentos/navbar :: nav_bar}"></div>
+
+
+
+    <div class="main">
+        <div class="container px-4 py-5">
+
+            <!-- Formulario -->
+            <div class="container my-4">
+                <h2>Reservar Cita</h2>
+                <div class="row">
+                    <!-- Mostrar mensaje de éxito o error -->
+                    <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+                    <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+
+                    <form th:action="@{/citas/reservar}" method="post" class="mt-2">
+
+                        <div class="row mt-4">
+                            <div class="col-6 mb-3">
+                                <label for="nombrePaciente" class="form-label">Nombre Completo</label>
+                                <input type="text" class="form-control" name="nombrePaciente" id="nombrePaciente" required>
+
+                            </div>
+                            <div class="col-3 mb-3">
+                                <label for="DNI" class="form-label">Documento de Identidad</label>
+                                <input type="text" class="form-control" name="DNI" id="DNI" required>
+                            </div>
+                            <div class="col-3 mb-3">
+                                <label for="edad" class="form-label">Edad</label>
+                                <input type="text" class="form-control" name="edad" id="edad" required>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-4 mb-3">
+                                <label for="motivoConsulta" class="form-label">Motivo de Consulta</label>
+                                <input type="text" class="form-control" name="motivoConsulta" id="motivoConsulta" required>
+                            </div>
+
+                            <div class="col-4 mb-3">
+                                <label for="area"  class="form-label" >Área de Consulta:</label>
+                                <select class="form-select" name="area" id="area" required>
+                                    <option>Open this select menu </option>
+                                    <option th:each="area: ${listaAreas}"
+                                            th:text="${area.nombreArea}" th:value="${area.idAreas}"></option>
+                                </select>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <label for="profesionales"  class="form-label">Nombre del Profesional:</label>
+                                <select class="form-select" name="profesionales" id="profesionales"  required>
+                                    <option>Open this select menu </option>
+                                    <option th:each="profe: ${listaProfe}"
+                                            th:text="${profe.nombre}" th:value="${profe.idProfesionales}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+
+                            <div class="col-4 mb-3">
+                                <label for="sedes"  class="form-label" >sedes de Atención:</label>
+                                <select class="form-select" name="sedes" id="sedes"  required>
+                                    <option>Open this select menu </option>
+                                    <option th:each="sedes: ${listaSedes}"
+                                            th:text="${sedes.nombreSede}" th:value="${sedes.idSedes}"></option>
+                                </select>
+                            </div>
+
+                            <div class="col-4 mb-3">
+                                <label for="fecha"  class="form-label">Fecha de Consulta:</label>
+                                <select class="form-select" name="fecha" id="fecha"  required>
+                                    <option>Open this select menu </option>
+                                    <option th:each="fecha: ${listaFecha}"
+                                            th:text="${fecha.fechaDisponibilidad}" th:value="${fecha.idFechas}"></option>
+                                </select>
+                            </div>
+
+                            <div class="col-4 mb-3">
+                                <label for="riesgos"  class="form-label">Riesgo de Salud:</label>
+                                <select class="form-select" name="riesgos" id="riesgos"  required>
+                                    <option>Open this select menu </option>
+                                    <option th:each="riesgos: ${listaRiesgos}"
+                                            th:text="${riesgos.tipo}" th:value="${riesgos.idRiesgos}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <a th:href="@{/profesionales/listar}" class="btn btn-outline-danger">Regresar</a>
+                            <button type="submit" class="btn btn-outline-primary">Reservar Cita</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

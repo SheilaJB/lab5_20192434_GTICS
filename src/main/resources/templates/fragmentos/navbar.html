@@ -2,32 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <body>
 <header th:fragment="nav_bar" id="page-topbar">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-
       <a class="navbar-brand " href="#">Nueva Esperanza</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active " aria-current="page" href="/flores/Catalogo">Profesionales</a>
+            <a class="nav-link active" href="/profesionales/listar">Profesionales</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active " aria-current="page" href="#">Citas</a>
+            <a class="nav-link" href="#">Citas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active " aria-current="page" href="#">Pacientes</a>
+            <a class="nav-link" href="#">Pacientes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active " aria-current="page" href="#">Foro</a>
+            <a class="nav-link" href="#">Foro</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active " aria-current="page" href="#">Recursos</a>
+            <a class="nav-link" href="#">Recursos</a>
           </li>
         </ul>
-
       </div>
     </div>
   </nav>
