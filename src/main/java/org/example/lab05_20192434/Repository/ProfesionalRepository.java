@@ -11,4 +11,9 @@ import java.util.List;
 @Repository
 public interface ProfesionalRepository extends JpaRepository<Profesionales, Integer>{
 
+    //Filtroooooooo
+    /*
+    * No me sale :D help
+    * */
+
 }

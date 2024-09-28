@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Nuevo comentario</title>
+</head>
+<body>
+
+    <!--NavBar -->
+    <header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
+
+    <div class="main">
+        <div class="container px-4 py-5">
+            <h1>Enviar Comentario de Apoyo</h1>
+
+            <!-- Mostrar mensajes de éxito o error -->
+            <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+
+            <form th:action="@{/foro/enviarComentario}" method="post" class="mt-4">
+                <input name="idPacientes" type="hidden"/>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <label for="nombrePersona" class="form-label">Nombre Completo</label>
+                        <input type="text" class="form-control" name="nombrePersona" id="nombrePersona" required>
+                    </div>
+
+                    <div class="col-3 mb-3">
+                        <label for="edad" class="form-label">Edad</label>
+                        <input type="text" class="form-control" name="edad" id="edad" required >
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="comentario" class="form-label">Comentario de Apoyo</label>
+                    <textarea class="form-control" name="comentario" id="comentario" rows="4" required></textarea>
+                </div>
+
+                <div class="mt-4">
+                    <a th:href="@{/foro/comunidad}" class="btn btn-outline-danger" >Cancelar</a>
+                    <button type="submit" class="btn btn-outline-primary">Enviar Comentario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

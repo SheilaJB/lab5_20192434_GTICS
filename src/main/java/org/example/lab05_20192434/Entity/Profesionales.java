@@ -33,9 +33,6 @@ public class Profesionales {
     @JoinColumn(name = "idSede",nullable = false)
     private Sedes sedes;
 
-    @OneToMany
-    @JoinColumn(name = "Fechas",nullable = false)
-    private List<Fechas> fechas;
 
 
     public Collection<Object> getFechasDisponibles() {

@@ -13,7 +13,7 @@ public class Pacientes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPacientes", nullable = false)
-    private int idPacientes;
+    private Integer idPacientes;
 
     @Column(name = "nombrePaciente")
     private String nombrePaciente;
@@ -24,11 +24,8 @@ public class Pacientes {
     @Column(name = "Edad")
     private int edad;
 
-    @Column(name = "Pacientescol")
-    private String pacientescol;
-
     @OneToMany
-    @JoinColumn(name = "Citas")
+    @JoinColumn(name = "idCitas")
     private List<Citas> citas;
 
 }

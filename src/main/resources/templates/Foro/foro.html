@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Foro</title>
+</head>
+<body>
+
+    <!--NavBar -->
+    <header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
+
+
+
+    <div class="main">
+        <div class="container px-4 py-5 flex justify-content-center">
+            <div class="mt-4 mb-lg-4">
+                <div class=" justify-content-end">
+                    <h1>¡Bienvenido al Foro de la Comunidad!</h1>
+                </div>
+                <div class="mt-3 mb-3 justify-content-center">
+                    <p>Nos alegra tenerte aquí. Este espacio está diseñado para compartir experiencias, brindar apoyo y fomentar un ambiente positivo donde todos puedan expresarse. No dudes en compartir tus comentarios, hacer preguntas o aportar tu sabiduría.
+
+                        Recuerda que tu voz es importante y puede marcar la diferencia. Juntos, podemos construir una comunidad solidaria y enriquecedora.
+
+                        ¡Esperamos ver tus contribuciones y que disfrutes de tu tiempo aquí!</p>
+                </div>
+                <div class="col-md-2 mt-4">
+                    <a th:href="@{/foro/nuevoComentario}" class="btn btn-outline-info w-100" > Nuevo Comentario </a>
+                </div>
+
+            </div>
+            <div class="justify-content-center mt-5">
+                <div class="row">
+                    <div th:each="comentario : ${comentarios}" class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <!-- Avatar -->
+                            <img src="/img/icono.jpg" class="avatar" alt="avatar">
+                            <div class="card-body">
+                                <!-- Nombre de la persona -->
+                                <h5 th:text="${comentario.nombrePersona}"></h5>
+                                <!-- Edad de la persona -->
+                                <p>Edad: <span th:text="${comentario.edad}"></span></p>
+                                <!-- Comentario -->
+                                <p class="card-text" th:text="${comentario.comentario}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

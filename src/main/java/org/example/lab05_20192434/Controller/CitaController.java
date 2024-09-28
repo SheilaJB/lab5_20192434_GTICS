@@ -4,13 +4,12 @@ import org.example.lab05_20192434.Entity.*;
 import org.example.lab05_20192434.Repository.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.awt.*;
+import java.awt.geom.Area;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -36,14 +35,56 @@ public class CitaController {
         this.pacienteRepository = pacienteRepository;
     }
 
+    //Vista principal
+    @GetMapping("/lista")
+    public String listarCitas(Model model) {
+        List<Citas> listaCitas = citaRepository.findAll();
+        List<Areas> listaAreas = areasRepository.findAll();
+        List<Sedes>  listaSedes = sedeRepository.findAll();
+        List<Riesgos>  listaRiesgos = riesgoRepository.findAll();
+        List<Profesionales>  listaProfe = profesionalRepository.findAll();
+        List<Fechas>  listaFecha = fechaRepository.findAll();
+
+
+        model.addAttribute("listaCitas", listaCitas);
+        model.addAttribute("listaAreas", listaAreas);
+        model.addAttribute("listaSedes", listaSedes);
+        model.addAttribute("listaRiesgos", listaRiesgos);
+        model.addAttribute("listaProfe", listaProfe);
+        model.addAttribute("listaFecha", listaFecha);
+
+
+        return "Citas/listaCitas";
+    }
+
+    @GetMapping("/estadistica")
+    public String estadistica(Model model) {
+        // Obtener número de citas por sede
+        List<Object[]> citasPorSede = citaRepository.obtenerCitasPorSede();
+        // Obtener número de citas por especialidad
+        List<Object[]> citasPorEspecialidad = citaRepository.obtenerCitasPorEspecialidad();
+        // Obtener número de citas por profesional
+        List<Object[]> citasPorProfesional = citaRepository.obtenerCitasPorProfesional();
+
+        model.addAttribute("citasPorSede", citasPorSede);
+        model.addAttribute("citasPorEspecialidad", citasPorEspecialidad);
+        model.addAttribute("citasPorProfesional", citasPorProfesional);
+        return "Citas/infoC";
+
+    }
+
+
+
+
+
     @PostMapping("/reservar")
-    public String reservarCita(@ModelAttribute("cita") Citas cita, RedirectAttributes redirectAttributes) {
+    public String reservarCita(@ModelAttribute("cita") Citas cita, RedirectAttributes redirectAttributes, @RequestParam("nombrePaciente") String nombrePaciente,
+                                                                                            @RequestParam("dni") String dni, @RequestParam("edad") int edad ) {
         // Validar si el profesional coincide con su área
         if (!cita.getProfesionales().getArea().equals(cita.getArea())) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error: El profesional no coincide con su área de especialidad.");
             return "redirect:/citas/reservarCita";
         }
-
         // Validar si el profesional está disponible en la sede seleccionada
         if (!cita.getProfesionales().getSede().equals(cita.getSede())) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error: El profesional no está disponible en la sede seleccionada.");
@@ -51,12 +92,23 @@ public class CitaController {
         }
 
         // Validar si el profesional está disponible en la fecha seleccionada
-        if (!cita.getProfesionales().getFechasDisponibles().contains(cita.getFecha())) {
+        if (!cita.getProfesionales().getIdProfesionales().equals(cita.getFecha().getProfesionales().getIdProfesionales())) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error: El profesional no está disponible en la fecha seleccionada.");
+
             return "redirect:/citas/reservarCita";
         }
 
         // Guardar la cita si todas las validaciones son correctas
+        //List<Pacientes> totalPacientes = pacienteRepository.findAll();
+        //int newId= totalPacientes.size() + 1;
+        Pacientes newPaciente = new Pacientes();
+        newPaciente.setNombrePaciente(nombrePaciente);
+        newPaciente.setDni(dni);
+        newPaciente.setEdad(edad);
+        //newPaciente.setIdPacientes(newId);
+        pacienteRepository.save(newPaciente);
+
+        cita.setPaciente(newPaciente);
         citaRepository.save(cita);
         redirectAttributes.addFlashAttribute("successMessage", "Cita reservada con éxito.");
         return "redirect:/citas/reservarCita";

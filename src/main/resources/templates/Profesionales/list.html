@@ -9,42 +9,51 @@
 <body>
 
   <!--NavBar -->
-  <header th:replace="fragmentos/navbar :: nav_bar"></header>
+  <header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
 
 
   <div class="main">
-    <div class="container px-4 py-5">
+    <div class="container px-4 py-5 flex justify-content-center">
+      <div class="mt-4 mb-lg-4">
+        <h1>Catálogo de profesionales</h1>
+      </div>
 
       <!-- Buscador / Filtro -->
       <div class="container my-4">
 
-        <form class="row g-3 mb-4 justify-content-center" method="get"> <!-- Añadida la ruta de acción -->
-          <div class="col-md-3"> <!-- Área -->
-            <select name="area" class="form-select">
-              <option value="">Elige Área</option>
-              <option value="Psiquiatras">Psiquiatras</option>
-              <option value="Neurólogos">Neurólogos</option>
-              <option value="Psicólogos">Psicólogos</option>
-              <option value="Terapeutas">Terapeutas</option>
+        <form class="row col-lg-12 mb-4 justify-content-end"  action="/profesionales/listar"  method="get"> <!-- Añadida la ruta de acción -->
+          <div class="col-md-2"> <!-- Área -->
+            <label for="area"  class="form-label" >Área:</label>
+            <select class="form-select" name="area" id="area" required>
+              <option value="">Todas las áreas</option>
+              <option th:each="area: ${listaAreas}"
+                      th:text="${area.nombreArea}" th:value="${area.idAreas}"></option>
             </select>
           </div>
-          <div class="col-md-3"> <!-- Sede -->
-            <select name="sede" class="form-select">
-              <option value="">Elige Sede</option>
-              <option value="San Martín">San Martín</option>
-              <option value="Lima">Lima</option>
-              <option value="Arequipa">Arequipa</option>
-              <option value="Trujillo">Trujillo</option>
-              <option value="Ayacucho">Ayacucho</option>
+          <div class="col-md-2"> <!-- Sede -->
+            <label for="sedes"  class="form-label" >Sedes:</label>
+            <select class="form-select" name="sedes" id="sedes"  required>
+              <option value="">Todas las sedes</option>
+              <option th:each="sedes: ${listaSedes}"
+                      th:text="${sedes.nombreSede}" th:value="${sedes.idSedes}"></option>
             </select>
           </div>
-          <div class="col-md-3"> <!-- Fecha -->
-            <input type="date" name="fecha" class="form-control">
+          <div class="col-md-2"> <!-- Fecha -->
+            <label for="fecha"  class="form-label">Fecha:</label>
+            <select class="form-select" name="fecha" id="fecha"  required>
+              <option>Open this select menu </option>
+              <option th:each="fecha: ${listaFecha}"
+                      th:text="${fecha.fechaDisponibilidad}" th:value="${fecha.idFechas}"></option>
+            </select>
           </div>
-          <div class="col-3 justify-content-end">
-            <button type="submit" class="btn btn-outline-primary">Filtrar</button>
-            <a th:href="@{/profesionales/listar}" class="btn btn-outline-secondary">Limpiar</a> <!-- Limpiar filtros -->
-            <a th:href="@{/citas/reservarCita}" class="btn btn-outline-info" > Registrar Cita </a>
+          <div class="col-md-2 mt-4">
+            <button type="submit" class="btn btn-outline-primary w-100">Filtrar</button>
+          </div>
+          <div class="col-md-2 mt-4">
+            <a th:href="@{/profesionales/listar}" class="btn btn-outline-secondary w-100">Limpiar</a> <!-- Limpiar filtros -->
+          </div>
+          <div class="col-md-2 mt-4">
+            <a th:href="@{/citas/reservarCita}" class="btn btn-outline-info w-100" > Registrar Cita </a>
           </div>
         </form>
 
@@ -52,7 +61,7 @@
         <div class="row">
           <div class="col-md-3 mb-4" th:each="profe: ${listaProfe}">
             <div class="card h-100">
-              <img src="/img/doctor.jpg" class="card-img-top" alt="doctor"> <!-- Placeholder o imagen de la DB -->
+              <img src="/img/doctor.jpg" class="card-img-top" alt="doctor">
               <div class="card-body">
                 <h5 class="card-title" th:text="${profe.nombre}">Nombre del Profesional</h5>
                 <p class="card-text" th:text="${profe.area.nombreArea}">Área</p>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Estadísticas de Citas</title>
+</head>
+<body>
+
+<!--NavBar -->
+<header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
+
+
+<div class="main">
+    <div class="container px-4 py-5 flex justify-content-center">
+        <div class="mt-4 mb-lg-4">
+            <h1>Estadísticas de Citas</h1>
+        </div>
+
+        <div class="row g-12 mb-4 justify-content-end">
+            <div class="col-md-2 mt-4"><a th:href="@{/citas/lista}" class="btn btn-outline-danger w-100" > Regresar</a></div>
+        </div>
+        <div class="row mt-2 mb-2">
+            <div class="col-4 mb-3 justify-content-end">
+                <h6>Número de Citas por Sede</h6>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Sede</th>
+                        <th>Total Citas</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="sede : ${citasPorSede}">
+                        <td th:text="${sede[0]}"></td>
+                        <td th:text="${sede[1]}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4 mb-3 justify-content-end">
+                <h6>Número de Citas por Especialidad</h6>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Especialidad</th>
+                        <th>Total Citas</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="especialidad : ${citasPorEspecialidad}">
+                        <td th:text="${especialidad[0]}"></td>
+                        <td th:text="${especialidad[1]}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4 mb-3 justify-content-end">
+                <h6>Número de Citas por Profesional</h6>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Profesional</th>
+                        <th>Total Citas</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="profesional : ${citasPorProfesional}">
+                        <td th:text="${profesional[0]}"></td>
+                        <td th:text="${profesional[1]}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

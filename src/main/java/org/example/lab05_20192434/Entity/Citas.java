@@ -6,10 +6,11 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Citas")
+@Table(name = "citas")
 public class Citas {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCitas")
     private int idCitas;
 
@@ -18,8 +19,10 @@ public class Citas {
 
     @Column(name = "precio")
     private int precio;
-    @Column(name = "Citascol")
-    private String Citascol;
+
+    @ManyToOne
+    @JoinColumn(name = "idPaciente")
+    private Pacientes paciente;
 
     @ManyToOne
     @JoinColumn(name = "idArea")

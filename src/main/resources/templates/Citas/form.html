@@ -18,7 +18,7 @@
 
             <!-- Formulario -->
             <div class="container my-4">
-                <h2>Reservar Cita</h2>
+                <h1>Reservar Cita</h1>
                 <div class="row">
                     <!-- Mostrar mensaje de éxito o error -->
                     <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
@@ -26,6 +26,8 @@
 
                     <form th:action="@{/citas/reservar}" method="post" class="mt-2">
 
+
+                        <input name="idPacientes" type="hidden"/>
                         <div class="row mt-4">
                             <div class="col-6 mb-3">
                                 <label for="nombrePaciente" class="form-label">Nombre Completo</label>
@@ -33,8 +35,8 @@
 
                             </div>
                             <div class="col-3 mb-3">
-                                <label for="DNI" class="form-label">Documento de Identidad</label>
-                                <input type="text" class="form-control" name="DNI" id="DNI" required>
+                                <label for="dni" class="form-label">Documento de Identidad</label>
+                                <input type="text" class="form-control" name="dni" id="dni" required>
                             </div>
                             <div class="col-3 mb-3">
                                 <label for="edad" class="form-label">Edad</label>
@@ -92,6 +94,10 @@
                                             th:text="${riesgos.tipo}" th:value="${riesgos.idRiesgos}"></option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="col-4 mb-3">
+                            <label for="precio" class="form-label">Precio</label>
+                            <input type="text" class="form-control" name="precio" id="precio" required>
                         </div>
 
                         <div class="mt-5">

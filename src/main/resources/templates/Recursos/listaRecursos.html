@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Recursos</title>
+</head>
+<body>
+
+<!--NavBar -->
+<header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
+
+
+<div class="main">
+    <div class="container px-4 py-5">
+
+        <div class="row justify-content-center">
+            <img src="/img/flor.jpeg" style="max-width: 100%; height: auto; width: 300px;">
+            <div class="mt-4">
+                <strong>La salud mental en Perú ha ganado relevancia en los últimos años, especialmente tras la pandemia de COVID-19, que exacerbó problemas de ansiedad, depresión y estrés en la población. Según estudios recientes, un porcentaje significativo de peruanos ha experimentado algún tipo de trastorno mental, y la demanda de servicios de salud mental ha aumentado considerablemente</strong>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mb-3">
+                <div class="container mt-5">
+                    <h2 class="mt-4">Frases de ánimo</h2>
+                    <li class="list-group-item" th:each="frase : ${listaFrases}">
+                        <span th:text="${frase}"></span>
+                    </li>
+                </div>
+            </div>
+            <div class="col-6 mb-3 d-flex justify-content-center">
+                <img src="/img/carita.jpeg" style="max-width: 100%; height: auto; width: 300px;">
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-4 mb-3">
+                <div class="container mt-5">
+                    <h2 class="mt-4">Música para el Ánimo: HAPPY SONGS</h2>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nombre de la canción - Autor</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cancion : ${listaTipo1}">
+                            <td th:text="${cancion}"></td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(listaTipo1)}">
+                            <td>No hay canciones alegres disponibles en este momento :( .</td>
+                        </tr>
+                        <tr>
+                            <td th:text="'Total de canciones: ' + ${listaTipo1.size()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-4 mb-3">
+                <div class="container mt-5">
+                    <h2 class="mt-4">Música para el Ánimo: SAD SONGS</h2>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nombre de la canción - Autor</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cancion : ${listaTipo0}">
+                            <td th:text="${cancion}"></td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(listaTipo0)}">
+                            <td>No hay canciones triste disponibles en este momento :( .</td>
+                        </tr>
+                        <tr>
+                            <td th:text="'Total de canciones: ' + ${listaTipo0.size()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-4 mb-3">
+                <div class="container mt-5">
+                    <h2 class="mt-4">Música para el Ánimo: K-POP SONGS</h2>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nombre de la canción - Autor</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cancion : ${listaTipo2}">
+                            <td th:text="${cancion}"></td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(listaTipo2)}">
+                            <td>No hay canciones K-POP disponibles en este momento :( .</td>
+                        </tr>
+                        <tr>
+                            <td th:text="'Total de canciones: ' + ${listaTipo2.size()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row"></div>
+
+
+    </div>
+</div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

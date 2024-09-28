@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+  <title>Gestión de Pacientes</title>
+</head>
+<body>
+
+<!--NavBar -->
+<header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
+
+
+<div class="main">
+        <div class="container px-4 py-5 flex justify-content-center">
+          <div class="mt-4 mb-lg-4">
+            <h1>Gestión de Pacientes</h1>
+          </div>
+          <div class="row">
+            <div class="col-6 mb-3 justify-content-end">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Resumen: Tipo de Riesgo por total de pacientes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="riesgo : ${pacientesPorRiesgo}">
+                  <td th:text="${riesgo[0]}"> Tipo de Riesgo</td> <!-- Tipo de Riesgo -->
+                  <td th:text="${riesgo[1]}">Total de pacientes</td> <!-- Número de Pacientes -->
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+
+          </div>
+          <div class="container my-4">
+
+            <!-- Lista -->
+            <div class="container mt-5">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>Nombre del Paciente</th>
+                  <th>DNI</th>
+                  <th>Edad</th>
+                  <th>Motivo de Consulta</th>
+                  <th>Riesgo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pa : ${citas}">
+                  <td th:text="${pa.paciente.nombrePaciente}"></td>
+                  <td th:text="${pa.paciente.dni}"></td>
+                  <td th:text="${pa.paciente.edad}"></td>
+                  <td th:text="${pa.motivoConsulta}"></td>
+                  <td th:text="${pa.riesgos.tipo}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(citas)}">
+                  <td> No hay pacientes disponibles en este momento </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+</div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

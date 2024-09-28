@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Gestión de Citas</title>
+</head>
+<body>
+
+<!--NavBar -->
+<header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
+
+
+<div class="main">
+    <div class="container px-4 py-5 flex justify-content-center">
+        <div class="mt-4 mb-lg-4">
+            <h1>Gestión de Citas</h1>
+        </div>
+        <div class="row g-12 mb-4 justify-content-end">
+            <div class="col-md-2 mt-4"><a th:href="@{/citas/reservarCita}" class="btn btn-outline-info w-100" > Registrar Cita </a></div>
+            <div class="col-md-2 mt-4"><a th:href="@{/citas/estadistica}" class="btn btn-outline-warning w-100" > Estadística </a></div>
+        </div>
+
+        <!-- Buscador / Filtro -->
+        <div class="container my-4">
+
+            <!-- r profesional, área, fecha, riesgo y sede -->
+
+            <form class="row g-12 mb-4 justify-content-center" method="get"> <!-- Añadida la ruta de acción -->
+                <div class="col-md-2"> <!-- profesional -->
+                    <label for="profesionales"  class="form-label">Profesional:</label>
+                    <select class="form-select" name="profesionales" id="profesionales" >
+                        <option>Open this select menu </option>
+                        <option th:each="profe: ${listaProfe}"
+                                th:text="${profe.nombre}" th:value="${profe.idProfesionales}"></option>
+                    </select>
+                </div>
+                <div class="col-md-2"> <!-- Área -->
+                    <label for="area"  class="form-label" >Área:</label>
+                    <select class="form-select" name="area" id="area" required>
+                        <option>Open this select menu </option>
+                        <option th:each="area: ${listaAreas}"
+                                th:text="${area.nombreArea}" th:value="${area.idAreas}"></option>
+                    </select>
+                </div>
+                <div class="col-md-2"> <!-- Sede -->
+                    <label for="sedes"  class="form-label" >Sedes:</label>
+                    <select class="form-select" name="sedes" id="sedes"  required>
+                        <option>Open this select menu </option>
+                        <option th:each="sedes: ${listaSedes}"
+                                th:text="${sedes.nombreSede}" th:value="${sedes.idSedes}"></option>
+                    </select>
+                </div>
+                <div class="col-md-2"> <!-- Fecha -->
+                    <label for="fecha"  class="form-label">Fecha:</label>
+                    <select class="form-select" name="fecha" id="fecha"  required>
+                        <option>Open this select menu </option>
+                        <option th:each="fecha: ${listaFecha}"
+                                th:text="${fecha.fechaDisponibilidad}" th:value="${fecha.idFechas}"></option>
+                    </select>
+                </div>
+                <div class="col-md-2 mt-4">
+                    <button type="submit" class="btn btn-outline-primary w-100">Filtrar</button>
+                </div>
+                <div class="col-md-2 mt-4"><a th:href="@{/profesionales/listar}" class="btn btn-outline-secondary w-100">Limpiar</a> </div>
+
+            </form>
+
+            <!-- Lista -->
+            <div class="container mt-5">
+                <table class="table table-striped"border="1">
+                    <thead>
+                    <tr>
+                        <th>Nombre del Paciente</th>
+                        <th>DNI</th>
+                        <th>Edad</th>
+                        <th>Motivo de Consulta</th>
+                        <th>Profesional</th>
+                        <th>Área</th>
+                        <th>Fecha</th>
+                        <th>Precio</th>
+                        <th>Riesgo</th>
+                        <th>Sede</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cita : ${listaCitas}">
+                        <td th:text="${cita.paciente.nombrePaciente}"></td>
+                        <td th:text="${cita.paciente.dni}"></td>
+                        <td th:text="${cita.paciente.edad}"></td>
+                        <td th:text="${cita.motivoConsulta}"></td>
+                        <td th:text="${cita.profesionales.nombre}"></td>
+                        <td th:text="${cita.area.nombreArea}"></td>
+                        <td th:text="${cita.fecha.fechaDisponibilidad}"></td>
+                        <td th:text="${cita.precio}"></td>
+                        <td th:text="${cita.riesgos.tipo}"></td>
+                        <td th:text="${cita.sedes.nombreSede}"></td>
+                    </tr >
+                    <tr th:if="${#lists.isEmpty(listaCitas)}">
+                        <td> No hay citas disponibles en este momento </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
