@@ -12,8 +12,8 @@ import java.util.List;
 public interface ProfesionalRepository extends JpaRepository<Profesionales, Integer>{
 
     //Filtroooooooo
-    /*
-    * No me sale :D help
-    * */
+    //List<Profesionales> findByArea_Sede_Fecha(String area, String sede, String fecha );
+
+
 
 }

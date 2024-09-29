@@ -36,6 +36,8 @@ public class ProfesionalController {
     //Lista de profesionales
     @GetMapping("/listar")
     public String listar(Model model) {
+
+
         List<Profesionales> listaProfe = profesionalRepository.findAll();
         List<Areas> listaAreas = areasRepository.findAll();
         List<Sedes>  listaSedes = sedeRepository.findAll();
