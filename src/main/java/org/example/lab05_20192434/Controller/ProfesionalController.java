@@ -1,11 +1,18 @@
 package org.example.lab05_20192434.Controller;
 
 
+<<<<<<< HEAD
 import org.example.lab05_20192434.Entity.Areas;
 import org.example.lab05_20192434.Entity.Fechas;
 import org.example.lab05_20192434.Entity.Profesionales;
 import org.example.lab05_20192434.Entity.Sedes;
 import org.example.lab05_20192434.Repository.*;
+=======
+import org.example.lab05_20192434.Entity.Fechas;
+import org.example.lab05_20192434.Entity.Profesionales;
+import org.example.lab05_20192434.Repository.FechasRepository;
+import org.example.lab05_20192434.Repository.ProfesionalRepository;
+>>>>>>> develop/laboratorio
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +26,7 @@ public class ProfesionalController {
 
     //Repositorios
     final ProfesionalRepository profesionalRepository;
+<<<<<<< HEAD
     final AreasRepository areasRepository;
     final FechaRepository fechaRepository;
     final SedeRepository sedeRepository;
@@ -32,6 +40,13 @@ public class ProfesionalController {
         this.fechaRepository = fechaRepository;
         this.sedeRepository = sedeRepository;
         this.riesgoRepository = riesgoRepository;
+=======
+    final FechasRepository fechasRepository;
+
+    public ProfesionalController(ProfesionalRepository profesionalRepository, FechasRepository fechasRepository) {
+        this.profesionalRepository = profesionalRepository;
+        this.fechasRepository = fechasRepository;
+>>>>>>> develop/laboratorio
     }
     //Lista de profesionales
     @GetMapping("/listar")
@@ -51,4 +66,18 @@ public class ProfesionalController {
 
         return "Profesionales/list";
     }
+<<<<<<< HEAD
+=======
+
+    @GetMapping("/reservarCita")
+    public String reservarCita(Model model) {
+        List<Profesionales> listaProfe = profesionalRepository.findAll();
+        List<Fechas> listaFecha = fechasRepository.findAll();
+        model.addAttribute("listaProfe", listaProfe);
+        model.addAttribute("listaFecha", listaFecha);
+        return "Profesionales/form";
+    }
+
+
+>>>>>>> develop/laboratorio
 }
